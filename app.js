@@ -2,7 +2,10 @@ const express = require('express');
 const config = require('./config.json')
 const { createProxyMiddleware } = require('http-proxy-middleware');
 const app = express();
+const path = require('path');
 
+// 托管静态文件
+app.use('/static', express.static(path.join(__dirname, 'public')))
 
 app.use((req, res, next) => {
     res.header('Access-Control-Allow-Origin', '*');
