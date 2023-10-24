@@ -1,4 +1,5 @@
 const express = require('express');
+const config = require('./config.json')
 const { createProxyMiddleware } = require('http-proxy-middleware');
 const app = express();
 
