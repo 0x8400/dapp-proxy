@@ -40,7 +40,7 @@ app.use((req, res, next) => {
     }
   });
 
-app.listen(3000, () => {
+app.listen(80, () => {
   console.log('Server is running on http://0.0.0.0:80');
 });
 const injectScript = (html, script) => {
