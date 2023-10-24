@@ -17,24 +17,24 @@ app.use((req, res, next) => {
       createProxyMiddleware({ 
         target: targetUrl, 
         changeOrigin: true,
-        onProxyRes: (proxyRes, req, res) => {
-            const end = res.end;
-            const write = res.write;
-            let buffer = Buffer.from('');
+        // onProxyRes: (proxyRes, req, res) => {
+        //     const end = res.end;
+        //     const write = res.write;
+        //     let buffer = Buffer.from('');
         
-            res.write = (data) => {
-              buffer = Buffer.concat([buffer, data]);
-            };
+        //     res.write = (data) => {
+        //       buffer = Buffer.concat([buffer, data]);
+        //     };
         
-            res.end = () => {
-              const html = buffer.toString();
-              const script = '<script>window.ethereum = window.parent.ethereum;</script>';
-              const modifiedHtml = injectScript(html, script);
-              res.setHeader('content-length', modifiedHtml.length);
-              write.call(res, modifiedHtml);
-              end.call(res);
-            };
-          },
+        //     res.end = () => {
+        //       const html = buffer.toString();
+        //       const script = '<script>window.ethereum = window.parent.ethereum;</script>';
+        //       const modifiedHtml = injectScript(html, script);
+        //       res.setHeader('content-length', modifiedHtml.length);
+        //       write.call(res, modifiedHtml);
+        //       end.call(res);
+        //     };
+        //   },
       })(req, res, next);
     } else {
       res.status(404).send('Not found');
